@@ -4,6 +4,7 @@ import rospy
 from actionlib import SimpleActionClient
 from llama_chatbot.srv import *
 from pal_interaction_msgs.msg import TtsAction, TtsGoal
+from rospy import Header
 from hri_msgs.msg import LiveSpeech
 
 
@@ -28,7 +29,7 @@ def getSpeechMsg(msg):
     print("Requesting tts")
     goal = TtsGoal()
     goal.rawtext.text = response.response
-    goal.rawtext.lang_id = 'en_GB'
+    goal.rawtext.lang_id = 'en_US'
     tts.send_goal_and_wait(goal)
     print("TTS successful.")
 

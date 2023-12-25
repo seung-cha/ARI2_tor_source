@@ -67,8 +67,6 @@ CATKIN_IGNORE
 models/
 
 
-
-#Ignore messages
 hri_actions_msgs/
 hri_msgs/
 humanoid_msgs/

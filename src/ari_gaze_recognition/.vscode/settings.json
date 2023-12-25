@@ -1,0 +1,12 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/seung/ari_development_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/seung/pynaoqi/lib/python2.7/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/seung/ari_development_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/seung/pynaoqi/lib/python2.7/site-packages"
+    ]
+}

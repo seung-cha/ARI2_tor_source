@@ -29,7 +29,7 @@ def GetResponse(request):
 
 if __name__ == "__main__":
 
-    llamaLLM = Llama(model_path="./models/ggml-model-q4_0.bin", seed= -1, n_gpu_layers=35)
+    llamaLLM = Llama(model_path="./models/ggml-model-q4_0.gguf", seed= -1, n_gpu_layers=35)
 
     msg = ChatCompletionMessage(role="User",content= '''You are in a vocal conversation with the user.
                                 \nYour response must be clear and short. Your name is Ari.

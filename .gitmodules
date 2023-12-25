@@ -1,0 +1,12 @@
+[submodule "hri_actions_msgs"]
+	path = hri_actions_msgs
+	url = https://github.com/ros4hri/hri_actions_msgs.git
+[submodule "hri_msgs"]
+	path = hri_msgs
+	url = https://github.com/ros4hri/hri_msgs.git
+[submodule "humanoid_msgs"]
+	path = humanoid_msgs
+	url = https://github.com/ahornung/humanoid_msgs.git
+[submodule "pal_msgs"]
+	path = pal_msgs
+	url = https://github.com/pal-robotics/pal_msgs.git

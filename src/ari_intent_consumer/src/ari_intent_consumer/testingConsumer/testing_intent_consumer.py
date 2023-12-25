@@ -19,16 +19,16 @@ class TestIntentConsumer(IntentConsumer.IntentConsumer):
     def OnNotification(self, intent: Intent) -> bool:
         try:
             print("Sending goal")
-            print('I heard an  intent with ' + str(intent.confidence) + ' confidence.')
+            print('I heard an intent with ' + str(intent.intent) + ' intent.')
             goal = TtsGoal()
-            goal.rawtext.text = 'I heard an intent with ' + str(intent.confidence) + ' confidence.'
+            goal.rawtext.text = 'I heard an intent with ' + str(intent.intent) + ' intent.'
             goal.rawtext.lang_id = 'en_GB'
 
             self.tts_client.send_goal(goal=goal)
             print("Goal sent")
-            return 0
+            return False
 
         except rospy.ROSInterruptException:
             print("Unexpectedly finished")
-            return 0
+            return False
     

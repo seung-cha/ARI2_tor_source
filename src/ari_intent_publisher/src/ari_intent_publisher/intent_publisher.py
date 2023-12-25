@@ -4,15 +4,17 @@ import rospy
 
 class IntentPublisher:
     """ Wrapper class for creating a publisher that publishes to /intents.
-    IntentPublisher abstracts away the process of creating/publishing data to /intents."""
-
+    IntentPublisher abstracts away the process of creating/publishing data to /intents.
+    DO NOT CALL rospy.init_node()
+    """
+    
 
     def __init__(self, name:str):
         """Initialise a publisher, named as ari_intent_publisher_arg."""
         self.__name = name
         self.__message = Intent()
-        self.__publisher = rospy.init_node('ari_intent_publisher_' + self.__name)
-        rospy.Publisher('/intents', Intent)
+        rospy.init_node('ari_intent_publisher_' + self.__name)
+        self.__publisher = rospy.Publisher('/intents', Intent, queue_size= 10)
 
     def SetIntent(self, intent:str):
         """Set the intent of the message.
@@ -62,43 +64,35 @@ class IntentPublisher:
     def GetConfidence(self)-> float:
         """Return the current confidence"""
         return self.__message.confidence
+
+    def SetData(self, data:dict):
+        """Set the data of the mssage.
+        Data must be a dictionary.
+        No specific form is required.
+
+        AS OF NOW DATA IS STRING
+        """
+        self.__message.data = data
+    
+    def GetData(self) -> dict:
+        """Return the current data
+
+        AS OF NOW IT MAY RETURN A STRING INSTEAD
+        """
+        return self.__message.dataspeech
+
+
+    def Publish(self):
+        """Publish the current intent to /intents"""
+        self.__publisher.publish(self.__message)
+
+    def PublishThenClear(self):
+        """Publish the current intent then wipe out the message"""
+        self.Publish()
+        self.ClearMessage()
     
 
     ### To do: Write functions for string data (map<str, str>)
-
-
-
-
-    class IntentConst:
-        """Definitions of constant variables for /intents"""
-        ENGAGE_WITH="__intent_engage_with__"
-        MOVE_TO="__intent_move_to__"
-        GUIDE="__intent_guide__"
-        GRAB_OBJECT="__intent_grab_object__"
-        BRING_OBJECT="__intent_bring_object__"
-        PLACE_OBJECT="__intent_place_object__"
-        GREET="__intent_greet__"
-        SAY="__intent_say__"
-        PRESENT_CONTENT="__intent_present_content__"
-        PERFORM_MOTION="__intent_perform_motion__"
-        START_ACTIVITY="__intent_start_activity__"
-        STOP_ACTIVITY="__intent_stop_activity__"
-        
-
-    class SourceConst:
-        ROBOT_ITSELF="__myself__"
-        REMOTE_SUPERVISOR="__remote_supervisor__"
-        UNKNOWN_AGENT="__unknown_agent__"
-        UNKNOWN="__unknown__"
-
-    class ModalityConst:
-        MODALITY_SPEECH="__modality_speech__"
-        MODALITY_MOTION="__modality_motion__"
-        MODALITY_TOUCHSCREEN="__modality_touchscreen__"
-        MODALITY_OTHER="__modality_other__"
-        MODALITY_INTERNAL="__modality_internal__"
-    
-
 
 
     
