@@ -18,6 +18,12 @@ from hri_msgs.msg import LiveSpeech
 # dynamically recognise intents
 
 
+#   UPDATE: TO DELETE LATER
+#
+#
+#
+
+
 def OnSpeechReceived(data:LiveSpeech):
     speech = data.final
     if len(speech) == 0:

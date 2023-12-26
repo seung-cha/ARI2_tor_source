@@ -29,7 +29,8 @@ class UserEngagementBundle(IntentConsumer):
 
     def OnNotification(self, intent: Intent) -> bool:
 
-        if intent.intent == IntentConst.ENGAGE_USER:
+        # Enable engagement
+        if intent.intent == IntentConst.ENGAGE_USER and self.isActive is False:
             self.isActive = True
 
             # Give the user feedback
@@ -40,6 +41,19 @@ class UserEngagementBundle(IntentConsumer):
 
             print('Engaging!')
             return True
+        
+        # Disable engagement
+        if intent.intent == IntentConst.DISENGAGE_USER and self.isActive is True:
+            self.isActive = False
+
+            # Give the user feedback
+            msg = TtsGoal()
+            msg.rawtext.lang_id = 'en_GB'
+            msg.rawtext.text = 'Goodbye.'
+            self.ttsPub.send_goal(msg)
+
+            print('Disengaged')
+            return False
 
         if self.isActive:
             pass

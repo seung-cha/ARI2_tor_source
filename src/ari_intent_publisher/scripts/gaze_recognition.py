@@ -28,10 +28,25 @@ class GazeDetector:
 
         print('Node ready! [2/2]')
 
+        # To disengage activity
+        self.active = False
+        self.disengageCount = 3
+
     def Update(self):
         print('Updating')
 
+        if self.disengageCount <= 0 and self.active:
+            self.active = False
+            print('engagement disabled, publishing intent')
+            self.intent_pub.SetIntent(IntentConst.DISENGAGE_USER)
+            self.intent_pub.Publish()
+
+        self.disengageCount = self.disengageCount - 1
+
         for id, face in self.hri.faces.items():
+
+            self.disengageCount = 3
+
             print("Currently seeing face %s" % id)
 
             if id in self.recogList:
@@ -39,7 +54,9 @@ class GazeDetector:
             else:
                  self.recogList[id] = 1
 
-            if self.recogList[id] == 3:
+            if self.recogList[id] == 3 and self.active is False:
+                self.active = True
+                self.intent_pub.SetIntent(IntentConst.ENGAGE_USER)
                 self.intent_pub.Publish()
 
 
