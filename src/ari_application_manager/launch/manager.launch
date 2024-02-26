@@ -1,0 +1,23 @@
+<launch>
+
+    <!-- Initial Setup script-->
+    <node name="init" pkg="ari_application_manager" type="init.py" output="screen" />
+
+    
+
+    <!-- Launch the application manager which controls a set of intent consumers.-->
+    <node name="application_manager" pkg="ari_application_manager" type="application_manager.py" output="screen" />
+
+    
+    <!-- Launch the necessary services. -->
+    <!--<node name="gaze_manager" pkg="ari_gaze_manager" type="gaze_manager.py" output="screen" />-->
+    <node name="llama_server" pkg="llama_chatbot" type="llama_chatbot_server.py" output="screen" />
+
+    
+    
+    
+    <!-- Launch a set of intent publishers.-->
+    <node name="gaze_recognition" pkg="ari_intent_publisher" type="gaze_recognition.py" output="screen" />
+    <node name="speech_recognition" pkg="ari_intent_publisher" type="speech_recognition.py" output="screen" />
+
+</launch>

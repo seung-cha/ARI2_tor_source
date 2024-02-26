@@ -29,13 +29,12 @@ def GetResponse(request):
 
 if __name__ == "__main__":
 
-    llamaLLM = Llama(model_path="./models/ggml-model-q4_0.gguf", seed= -1, n_gpu_layers=35)
+    
+    llamaLLM = Llama(model_path=os.path.expanduser('~/ari_development_ws/src/llama_chatbot/models/ggml-model-q4_0.gguf'), seed= -1, n_gpu_layers=32)
 
-    msg = ChatCompletionMessage(role="User",content= '''You are in a vocal conversation with the user.
-                                \nYour response must be clear and short. Your name is Ari.
-                                \n Below is the trascript with the user.
-                                \n\nUser: Hi, how are you doing?
-                                \nYou: Hi! I'm doing great! Thanks for asking. Is there anything I can help you with?''')
+    msg = ChatCompletionMessage(role="User",content= '''Your name is Ari and you are in a conversation with a user.
+                                \nYour responses should be concise and clear. Try to keep your responses in 1 sentence.
+                                \nIf you do not understand the user's question or their question doesn't make sense, please ask them to repeat the question.''')
 
 
     promptHistory = [msg]

@@ -29,7 +29,12 @@ class SpeechRecognition:
         if len(speech) == 0:
             return
         
-        # If the robot hears the exact word 'Hello' or 'Bye', engage/disengage user.
+        # If the robot hears the exact word 'Hello' or 'goodbye', engage/disengage user.
+        # Listen to the exact word 'stop' to disable whatever is currently active.
+        # Otherwise, publish the data to /intent and let the other nodes handle it.
+
+
+    
         
         print(f'Heard: {speech}')
 
@@ -41,8 +46,18 @@ class SpeechRecognition:
         elif speech == 'goodbye':
             self.intent_pub.SetIntent(IntentConst.DISENGAGE_USER)
             self.intent_pub.Publish()
-
             print('Intent Published: Disengage')
+        elif speech == 'stop':
+            self.intent_pub.SetIntent(IntentConst.STOP_ACTIVITY)
+            self.intent_pub.Publish()
+            print('Intent Published: Stop Activity')
+        else:
+            self.intent_pub.SetIntent(IntentConst.ANSWER_CONTENT)
+            self.intent_pub.SetData(speech)
+            self.intent_pub.Publish()
+            print('Intent Published: Conversation')
+            self.intent_pub.SetData("")
+
 
         
 
