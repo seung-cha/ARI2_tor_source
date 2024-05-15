@@ -10,7 +10,6 @@ Detection Strategy:
     Robot initiates engagement and looks at the face until it is lost.
     When the face is lost, try to look for other faces. If there is one, start tracking that face instead.
     If no faces are present for 6 seconds, cease engagement, look front and repeat this process.
-
 """
 
 import rospy
@@ -74,8 +73,6 @@ class GazeDetector:
         self.idleDuration = self.idleDuration - 1
 
 
-
-
         # face is lost.
         if self.engagementTarget not in self.hri.faces and self.activeEngagement:
             #print('face is lost')
@@ -88,7 +85,6 @@ class GazeDetector:
             self.proxy(3, self.engagementFrame)
             #print(self.proxy(3, self.engagementFrame))
 
-        
         # Disable engagement
         if self.idleDuration <= 0 and self.activeEngagement:
             self.activeEngagement = False

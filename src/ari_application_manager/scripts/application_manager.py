@@ -13,8 +13,8 @@ from std_srvs.srv import Empty
 class ApplicationManager:
     def __init__(self):
         rospy.init_node(name= "ari_application_manager", anonymous=False)
-        self.controller = Application_Controller.ApplicationController()
-        self.intentSub = rospy.Subscriber('/intents', Intent, self.OnIntentReceived)
+        self._controller = Application_Controller.ApplicationController()
+        self._intentSub = rospy.Subscriber('/intents', Intent, self.OnIntentReceived)
         
         #########################################3
         
@@ -22,12 +22,13 @@ class ApplicationManager:
         bundle = UserEngagementBundle()
         bundle.OnInit()
 
-        self.controller.AddConsumer(bundle)
+        self._controller.AddConsumer(bundle)
     
 
     def OnIntentReceived(self, data):
         """Called when an intent is published."""
-        self.controller.FireIntent(data)
+        self._controller.FireIntent(data)
+        
 
 
 

@@ -17,6 +17,7 @@ from pal_interaction_msgs.srv import GetSpeechDuration, GetSpeechDurationRequest
 from hri_actions_msgs.msg import Intent
 from llama_chatbot.srv import *
 
+
 #Sentiment analysis
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
@@ -30,7 +31,9 @@ class ChatbotIntentConsumer(IntentConsumer):
 
 
 
-    def OnInit(self):
+    def OnInit(self, parent=None):
+        self._parent = parent
+
         print('llama consumer initialising')
 
         rospy.wait_for_service('llama_chatbot_response')
@@ -101,7 +104,7 @@ class ChatbotIntentConsumer(IntentConsumer):
             print(f'Valence: ${valence}')
 
             if valence >= 0:
-                self.ChangeExpression(valence=0.0, arousal=valence)
+                self.ChangeExpression(valence=0.5, arousal=valence + 0.4)
             else:
                 self.ChangeExpression(valence=valence, arousal=0.0)
 
@@ -136,11 +139,12 @@ class ChatbotIntentConsumer(IntentConsumer):
                 debug_diff = (self.time_wait - time_now) / 1e9
                 print(f'New wait time is set: ${debug_diff}')            
 
-            
         
-            self.tts_server.send_goal_and_wait(goal)
-            self.ChangeExpression()
+            # Check if the bundle is active. Only speak if it is.
+            if self._parent.isActive:
+                self.tts_server.send_goal_and_wait(goal)
 
+            self.ChangeExpression()
             print('answered.')
             return True
         else:

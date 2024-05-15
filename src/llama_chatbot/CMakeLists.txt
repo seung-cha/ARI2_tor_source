@@ -157,8 +157,6 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
    scripts/llama_chatbot_server.py
-   scripts/llama_chatbot_client.py
-   scripts/llama_chatbot_client_test.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

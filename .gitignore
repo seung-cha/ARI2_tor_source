@@ -67,7 +67,3 @@ CATKIN_IGNORE
 models/
 
 
-hri_actions_msgs/
-hri_msgs/
-humanoid_msgs/
-pal_msgs/

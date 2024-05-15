@@ -58,7 +58,7 @@ class UserEngagementBundle(IntentConsumer):
 
         consumer:IntentConsumer
         for consumer in self.consumers:
-            consumer.OnInit()
+            consumer.OnInit(parent=self)
 
 
 
@@ -106,13 +106,6 @@ class UserEngagementBundle(IntentConsumer):
             
             self.isActive = False
 
-            # Give the user feedback
-            msg = TtsGoal()
-            msg.rawtext.lang_id = 'en_GB'
-            msg.rawtext.text = 'Goodbye.'
-            self.ttsPub.send_goal(msg)
-
-
             # Change the LED sensor, indicate that conversation is now terminated.
             msg = DoTimedLedEffectGoal()
             msg.devices = [0, 1, 2]
@@ -124,8 +117,28 @@ class UserEngagementBundle(IntentConsumer):
             msg.params.fixed_color.color.a = 1.0
             self.ledPub.send_goal(msg)
 
+
+            # Disable nodes that might be running
+            for consumer in self.consumers:
+                stopIntent = Intent()
+                stopIntent.intent = IntentConst.STOP_ACTIVITY
+                consumer.OnNotification(intent=stopIntent)
+
+
+
+            
+            # Give the user feedback
+            msg = TtsGoal()
+            msg.rawtext.lang_id = 'en_GB'
+            msg.rawtext.text = 'Goodbye.'
+            
+            self.ttsPub.send_goal(msg)
+
+
             print('Disengaged')
             return False
+        
+
 
         if self.isActive:
 

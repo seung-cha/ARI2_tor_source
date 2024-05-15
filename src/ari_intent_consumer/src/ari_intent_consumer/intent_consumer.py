@@ -2,10 +2,11 @@
 from hri_actions_msgs.msg import Intent
 
 class IntentConsumer:
+
     """Abstract class defined for consumer (subscriber) nodes.
     DO NOT call rospy.init_node()"""
 
-    def OnInit(self):
+    def OnInit(self, parent=None):
         """Assume rospy.init_node() is called by ApplicationManager.
         Initialise ROS nodes here."""
         pass

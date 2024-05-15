@@ -10,3 +10,6 @@
 [submodule "pal_msgs"]
 	path = pal_msgs
 	url = https://github.com/pal-robotics/pal_msgs.git
+[submodule "src/pyhri"]
+	path = src/pyhri
+	url = https://github.com/ros4hri/pyhri
