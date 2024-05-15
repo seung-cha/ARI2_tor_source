@@ -13,3 +13,21 @@
 [submodule "src/pyhri"]
 	path = src/pyhri
 	url = https://github.com/ros4hri/pyhri
+[submodule "src/ari_navigation"]
+	path = src/ari_navigation
+	url = https://github.com/pal-robotics/ari_navigation.git
+[submodule "src/ari_robot"]
+	path = src/ari_robot
+	url = https://github.com/pal-robotics/ari_robot.git
+[submodule "src/msgs/hri_actions_msgs"]
+	path = src/msgs/hri_actions_msgs
+	url = https://github.com/ros4hri/hri_actions_msgs.git
+[submodule "src/msgs/hri_msgs"]
+	path = src/msgs/hri_msgs
+	url = https://github.com/ros4hri/hri_msgs.git
+[submodule "src/msgs/humanoid_msgs"]
+	path = src/msgs/humanoid_msgs
+	url = https://github.com/ahornung/humanoid_msgs.git
+[submodule "src/msgs/pal_msgs"]
+	path = src/msgs/pal_msgs
+	url = https://github.com/pal-robotics/pal_msgs.git
