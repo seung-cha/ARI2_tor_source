@@ -31,3 +31,6 @@
 [submodule "src/msgs/pal_msgs"]
 	path = src/msgs/pal_msgs
 	url = https://github.com/pal-robotics/pal_msgs.git
+[submodule "src/msgs/attention_manager_msgs"]
+	path = src/msgs/attention_manager_msgs
+	url = https://github.com/pal-robotics/attention_manager_msgs.git

@@ -39,3 +39,26 @@ It is very easy to include or exclude functionalities thanks to
 
 # NOTE
 hri_msgs must be version 0.8.0, as this is what ARI uses.
+```
+# after catkin_make and source
+
+roscd hri_msgs
+
+# open package.xml and make sure the version is 0.8.0
+
+...
+  <name>hri_msgs</name>
+  <version>0.8.0</version>
+  <description>Messages, services and action definitions useful for Human-Robot Interaction</description>
+...
+```
+
+`attention_manager_msgs` in src/msgs/ should be renamed to `attention_manager`
+
+```
+mv attention_manager_msgs attention_manager
+cd attention_manager
+
+# edit CMakeLists.txt and package.xml to match the new project name
+```
+
