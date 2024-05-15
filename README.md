@@ -1,5 +1,5 @@
 # TOR source code
-Source code for my Taste of Research source code.
+Source code for my Taste of Research project.
 
 To run it make sure to export `LLAMA_FILE` that points to a llama model:
 
