@@ -36,3 +36,6 @@ It is very easy to include or exclude functionalities thanks to
 * llama-cpp-py
 * pyhri
 * nltk python
+
+# NOTE
+hri_msgs must be version 0.8.0, as this is what ARI uses.
